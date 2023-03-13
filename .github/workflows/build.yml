@@ -25,7 +25,7 @@ jobs:
       - name: run Unit tests.
         run: go install github.com/go-delve/delve/cmd/dlv@latest && go test  ./... -v -covermode=count -coverprofile=coverage.txt
       - name: upload Coverage report to CodeCov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.txt
