@@ -11,9 +11,9 @@ import (
 func (e *Engine) killCmd(cmd *exec.Cmd) (pid int, err error) {
 	pid = cmd.Process.Pid
 
-	if e.config.Build.SendInterrupt {
+	if e.config.Build.TerminateSignal != 0 {
 		// Sending a signal to make it clear to the process that it is time to turn off
-		if err = syscall.Kill(-pid, syscall.SIGINT); err != nil {
+		if err = syscall.Kill(-pid, e.config.Build.TerminateSignal); err != nil {
 			return
 		}
 		time.Sleep(e.config.Build.KillDelay)

@@ -9,6 +9,7 @@ import (
 	"reflect"
 	"regexp"
 	"runtime"
+	"syscall"
 	"time"
 
 	"github.com/imdario/mergo"
@@ -34,25 +35,26 @@ type Config struct {
 }
 
 type cfgBuild struct {
-	Cmd              string        `toml:"cmd"`
-	Bin              string        `toml:"bin"`
-	FullBin          string        `toml:"full_bin"`
-	ArgsBin          []string      `toml:"args_bin"`
-	Log              string        `toml:"log"`
-	IncludeExt       []string      `toml:"include_ext"`
-	ExcludeDir       []string      `toml:"exclude_dir"`
-	IncludeDir       []string      `toml:"include_dir"`
-	ExcludeFile      []string      `toml:"exclude_file"`
-	IncludeFile      []string      `toml:"include_file"`
-	ExcludeRegex     []string      `toml:"exclude_regex"`
-	ExcludeUnchanged bool          `toml:"exclude_unchanged"`
-	FollowSymlink    bool          `toml:"follow_symlink"`
-	Delay            int           `toml:"delay"`
-	StopOnError      bool          `toml:"stop_on_error"`
-	SendInterrupt    bool          `toml:"send_interrupt"`
-	KillDelay        time.Duration `toml:"kill_delay"`
-	Rerun            bool          `toml:"rerun"`
-	RerunDelay       int           `toml:"rerun_delay"`
+	Cmd              string         `toml:"cmd"`
+	Bin              string         `toml:"bin"`
+	FullBin          string         `toml:"full_bin"`
+	ArgsBin          []string       `toml:"args_bin"`
+	Log              string         `toml:"log"`
+	IncludeExt       []string       `toml:"include_ext"`
+	ExcludeDir       []string       `toml:"exclude_dir"`
+	IncludeDir       []string       `toml:"include_dir"`
+	ExcludeFile      []string       `toml:"exclude_file"`
+	IncludeFile      []string       `toml:"include_file"`
+	ExcludeRegex     []string       `toml:"exclude_regex"`
+	ExcludeUnchanged bool           `toml:"exclude_unchanged"`
+	FollowSymlink    bool           `toml:"follow_symlink"`
+	Delay            int            `toml:"delay"`
+	StopOnError      bool           `toml:"stop_on_error"`
+	SendInterrupt    bool           `toml:"send_interrupt"`
+	TerminateSignal  syscall.Signal `toml:"terminate_signal"`
+	KillDelay        time.Duration  `toml:"kill_delay"`
+	Rerun            bool           `toml:"rerun"`
+	RerunDelay       int            `toml:"rerun_delay"`
 	regexCompiled    []*regexp.Regexp
 }
 

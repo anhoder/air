@@ -307,7 +307,7 @@ func TestCtrlCWhenHaveKillDelay(t *testing.T) {
 	}
 	engine.config.Build.KillDelay = c.Build.KillDelay
 	engine.config.Build.Delay = 2000
-	engine.config.Build.SendInterrupt = true
+	engine.config.Build.TerminateSignal = syscall.SIGTERM
 	engine.config.preprocess()
 
 	go func() {

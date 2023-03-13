@@ -152,9 +152,7 @@ func TestAdaptToVariousPlatforms(t *testing.T) {
 func Test_killCmd_no_process(t *testing.T) {
 	e := Engine{
 		config: &Config{
-			Build: cfgBuild{
-				SendInterrupt: false,
-			},
+			Build: cfgBuild{},
 		},
 	}
 	_, err := e.killCmd(&exec.Cmd{
@@ -186,7 +184,7 @@ func Test_killCmd_SendInterrupt_false(t *testing.T) {
 	e := Engine{
 		config: &Config{
 			Build: cfgBuild{
-				SendInterrupt: false,
+				TerminateSignal: syscall.SIGINT,
 			},
 		},
 	}
@@ -279,7 +277,7 @@ func TestCheckIncludeFile(t *testing.T) {
 	e := Engine{
 		config: &Config{
 			Build: cfgBuild{
-				IncludeFile:   []string{"main.go"},
+				IncludeFile: []string{"main.go"},
 			},
 		},
 	}
